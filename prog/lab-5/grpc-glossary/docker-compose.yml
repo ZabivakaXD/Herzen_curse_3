@@ -1,0 +1,35 @@
+services:
+  glossary:
+    build: .
+    command: python -m glossary_service.server
+    environment:
+      PORT: "50051"
+      DATABASE_URL: sqlite:///./data/glossary.db
+    ports:
+      - "50051:50051"
+    volumes:
+      - ./data:/app/data   # SQLite сохраняется между перезапусками
+
+  recommendation:
+    build: .
+    command: python -m recommendation_service.server
+    environment:
+      PORT: "50052"
+      GLOSSARY_ADDR: glossary:50051
+    ports:
+      - "50052:50052"
+    depends_on:
+      - glossary
+
+  # Демо-клиент. Не запускается при up; вызывается вручную:
+  #   docker compose run --rm client
+  client:
+    build: .
+    command: python -m client.demo
+    environment:
+      GLOSSARY_ADDR: glossary:50051
+      RECO_ADDR: recommendation:50052
+    depends_on:
+      - glossary
+      - recommendation
+    profiles: ["demo"]

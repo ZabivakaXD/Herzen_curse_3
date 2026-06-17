@@ -1,0 +1,7 @@
+services:
+  glossary:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/app/data   # данные SQLite сохраняются между перезапусками

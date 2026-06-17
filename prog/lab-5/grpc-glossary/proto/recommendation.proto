@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package recommendation;
+
+// Переиспользуем типы из glossary.proto (демонстрация импорта protobuf).
+import "glossary.proto";
+
+message CategoryRequest {
+  string category = 1;
+}
+
+message RandomRequest {
+  int32 count = 1;
+}
+
+message RecommendReply {
+  repeated glossary.Term terms = 1;
+}
+
+message CategoryList {
+  repeated string categories = 1;
+}
+
+// Сервис рекомендаций. Сам является gRPC-клиентом GlossaryService.
+service RecommendationService {
+  // Термины указанной категории.
+  rpc RecommendByCategory(CategoryRequest) returns (RecommendReply);
+  // N случайных терминов (например, для повторения).
+  rpc RandomTerms(RandomRequest) returns (RecommendReply);
+  // Список всех доступных категорий.
+  rpc ListCategories(glossary.Empty) returns (CategoryList);
+}

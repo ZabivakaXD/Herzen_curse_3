@@ -1,0 +1,49 @@
+syntax = "proto3";
+
+package glossary;
+
+// Термин глоссария.
+message Term {
+  int32 id = 1;
+  string term = 2;
+  string definition = 3;
+  string category = 4;
+}
+
+message Empty {}
+
+// Запрос по ключевому слову (для получения и удаления).
+message TermKey {
+  string term = 1;
+}
+
+// Данные нового термина.
+message NewTerm {
+  string term = 1;
+  string definition = 2;
+  string category = 3;
+}
+
+// Запрос на обновление: term — ключ, остальное — новые значения.
+message UpdateTermRequest {
+  string term = 1;
+  string definition = 2;
+  string category = 3;
+}
+
+message TermList {
+  repeated Term terms = 1;
+}
+
+message DeleteReply {
+  string message = 1;
+}
+
+// Сервис глоссария: пять операций CRUD.
+service GlossaryService {
+  rpc ListTerms(Empty) returns (TermList);
+  rpc GetTerm(TermKey) returns (Term);
+  rpc AddTerm(NewTerm) returns (Term);
+  rpc UpdateTerm(UpdateTermRequest) returns (Term);
+  rpc DeleteTerm(TermKey) returns (DeleteReply);
+}
