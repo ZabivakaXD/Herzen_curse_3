@@ -89,12 +89,9 @@ def my_genn():
         l = list(itertools.islice(fib_gen, number_of_fib_elem))
         yield l  
 ```
-[Ссылка на код](https://github.com/ZabivakaXD/Herzen_curse_3/blob/main/prog/lab-2/gen-fib.py)
 
 Тесты:
 ![1.png](https://github.com/ZabivakaXD/Herzen_curse_3/blob/main/prog/lab-2/img/1.png)
-
-[Ссылка на код](https://github.com/ZabivakaXD/Herzen_curse_3/blob/main/prog/lab-2/test-fib.py)
 
 ## Задание 2
 
@@ -144,7 +141,5 @@ class FibonacchiLst:
 lst = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 1]
 print(list(FibonacchiLst(lst))) # [0, 1, 2, 3, 5, 8, 1]
 ```
-
-[Ссылка на код](https://github.com/ZabivakaXD/Herzen_curse_3/blob/main/prog/lab-2/even_numbers_iterator.py)
 
 

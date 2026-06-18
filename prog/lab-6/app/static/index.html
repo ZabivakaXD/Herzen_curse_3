@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Курсы валют ЦБ РФ · Наблюдатель</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    :root {
+      --bg: #0f1419;
+      --panel: #19212c;
+      --panel-2: #1f2935;
+      --line: #2b3848;
+      --ink: #e8ecf3;
+      --muted: #8a97ab;
+      --up: #3fc593;
+      --down: #f06576;
+      --flat: #8a97ab;
+      --accent: #f2b75e;
+      --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+      --display: "Space Grotesk", system-ui, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--display);
+      -webkit-font-smoothing: antialiased;
+    }
+    /* --- ticker tape (signature element) --- */
+    .ticker {
+      border-bottom: 1px solid var(--line);
+      background: var(--panel);
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .ticker-track {
+      display: inline-block;
+      padding: 10px 0;
+      animation: scroll 38s linear infinite;
+      font-family: var(--mono);
+      font-size: 14px;
+    }
+    .ticker-track span { margin: 0 22px; color: var(--muted); }
+    .ticker-track b { color: var(--ink); font-weight: 600; }
+    @keyframes scroll {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .ticker-track { animation: none; }
+    }
+
+    .wrap { max-width: 880px; margin: 0 auto; padding: 28px 20px 56px; }
+
+    header.head {
+      display: flex; flex-wrap: wrap; align-items: baseline;
+      justify-content: space-between; gap: 12px; margin-bottom: 6px;
+    }
+    h1 {
+      font-size: 26px; font-weight: 700; letter-spacing: -0.02em; margin: 0;
+    }
+    .sub { color: var(--muted); font-size: 14px; }
+
+    /* identity card */
+    .id-card {
+      display: flex; flex-wrap: wrap; gap: 18px; align-items: center;
+      background: var(--panel); border: 1px solid var(--line);
+      border-radius: 12px; padding: 16px 18px; margin: 18px 0 24px;
+    }
+    .id-block .label {
+      font-size: 11px; text-transform: uppercase; letter-spacing: 0.14em;
+      color: var(--muted); margin-bottom: 4px;
+    }
+    .id-value {
+      font-family: var(--mono); font-size: 20px; font-weight: 600;
+      color: var(--accent);
+    }
+    .status {
+      margin-left: auto; display: inline-flex; align-items: center; gap: 8px;
+      font-size: 13px; color: var(--muted);
+    }
+    .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--flat); }
+    .dot.on { background: var(--up); box-shadow: 0 0 0 4px rgba(63,197,147,0.15); }
+    .dot.off { background: var(--down); }
+
+    /* table */
+    table { width: 100%; border-collapse: collapse; font-family: var(--mono); }
+    thead th {
+      text-align: right; font-family: var(--display); font-weight: 500;
+      font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em;
+      color: var(--muted); padding: 10px 12px; border-bottom: 1px solid var(--line);
+    }
+    thead th:first-child, tbody td:first-child { text-align: left; }
+    tbody td { padding: 13px 12px; border-bottom: 1px solid var(--panel-2); font-size: 15px; }
+    tbody tr { transition: background 0.6s ease; }
+    .code { font-weight: 600; }
+    .name { color: var(--muted); font-family: var(--display); font-size: 13px; }
+    .val { text-align: right; font-weight: 600; }
+    .chg { text-align: right; font-weight: 600; }
+    .chg.up { color: var(--up); }
+    .chg.down { color: var(--down); }
+    .chg.flat { color: var(--flat); }
+    tr.flash-up { background: rgba(63,197,147,0.16); }
+    tr.flash-down { background: rgba(240,101,118,0.16); }
+
+    /* event log */
+    .log-title {
+      margin: 30px 0 10px; font-size: 12px; text-transform: uppercase;
+      letter-spacing: 0.1em; color: var(--muted);
+    }
+    .log {
+      font-family: var(--mono); font-size: 12.5px; color: var(--muted);
+      background: var(--panel); border: 1px solid var(--line); border-radius: 10px;
+      padding: 12px 14px; max-height: 180px; overflow-y: auto;
+    }
+    .log div { padding: 2px 0; }
+    .log .t { color: #5e6b7e; }
+  </style>
+</head>
+<body>
+  <div class="ticker"><div class="ticker-track" id="ticker">Подключение к серверу…</div></div>
+
+  <div class="wrap">
+    <header class="head">
+      <div>
+        <h1>Курсы валют ЦБ РФ</h1>
+        <div class="sub">Наблюдатель получает обновления по WebSocket в реальном времени</div>
+      </div>
+    </header>
+
+    <div class="id-card">
+      <div class="id-block">
+        <div class="label">Идентификатор клиента</div>
+        <div class="id-value" id="clientId">—</div>
+      </div>
+      <div class="id-block">
+        <div class="label">Дата котировок</div>
+        <div class="id-value" id="rateDate" style="color:var(--ink)">—</div>
+      </div>
+      <div class="status">
+        <span class="dot" id="dot"></span><span id="statusText">отключено</span>
+      </div>
+    </div>
+
+    <table>
+      <thead>
+        <tr><th>Валюта</th><th>Курс, ₽</th><th>Изм.</th><th>%</th></tr>
+      </thead>
+      <tbody id="rows">
+        <tr><td colspan="4" class="name">Ожидание данных…</td></tr>
+      </tbody>
+    </table>
+
+    <div class="log-title">Журнал уведомлений</div>
+    <div class="log" id="log"></div>
+  </div>
+
+  <script>
+    const fmt = (n, d = 4) => Number(n).toLocaleString("ru-RU", {
+      minimumFractionDigits: d, maximumFractionDigits: d,
+    });
+
+    const els = {
+      clientId: document.getElementById("clientId"),
+      rateDate: document.getElementById("rateDate"),
+      rows: document.getElementById("rows"),
+      ticker: document.getElementById("ticker"),
+      dot: document.getElementById("dot"),
+      statusText: document.getElementById("statusText"),
+      log: document.getElementById("log"),
+    };
+
+    let lastValues = {};
+
+    function setStatus(state) {
+      els.dot.className = "dot " + (state === "on" ? "on" : "off");
+      els.statusText.textContent = state === "on" ? "подключено" : "отключено";
+    }
+
+    function logLine(text) {
+      const time = new Date().toLocaleTimeString("ru-RU");
+      const div = document.createElement("div");
+      div.innerHTML = `<span class="t">${time}</span>  ${text}`;
+      els.log.prepend(div);
+      while (els.log.childElementCount > 50) els.log.lastChild.remove();
+    }
+
+    function renderTable(rates) {
+      els.rows.innerHTML = "";
+      rates.sort((a, b) => a.char_code.localeCompare(b.char_code));
+      for (const r of rates) {
+        const prev = lastValues[r.char_code];
+        const perUnit = r.value / r.nominal;
+        let delta = 0, pct = 0, dir = "flat";
+        if (prev != null) {
+          delta = perUnit - prev;
+          pct = prev ? (delta / prev) * 100 : 0;
+          dir = delta > 0 ? "up" : delta < 0 ? "down" : "flat";
+        }
+        const tr = document.createElement("tr");
+        const sign = delta > 0 ? "+" : "";
+        tr.innerHTML = `
+          <td><span class="code">${r.char_code}</span> <span class="name">${r.name}</span></td>
+          <td class="val">${fmt(perUnit)}</td>
+          <td class="chg ${dir}">${prev == null ? "—" : sign + fmt(delta)}</td>
+          <td class="chg ${dir}">${prev == null ? "—" : sign + fmt(pct, 2) + "%"}</td>`;
+        els.rows.appendChild(tr);
+        if (dir !== "flat") {
+          tr.classList.add(dir === "up" ? "flash-up" : "flash-down");
+          setTimeout(() => tr.classList.remove("flash-up", "flash-down"), 1200);
+        }
+        lastValues[r.char_code] = perUnit;
+      }
+    }
+
+    function renderTicker(rates) {
+      const part = rates
+        .map((r) => `<span><b>${r.char_code}</b> ${fmt(r.value / r.nominal, 2)} ₽</span>`)
+        .join("");
+      // дублируем для бесшовной прокрутки
+      els.ticker.innerHTML = part + part;
+    }
+
+    function connect() {
+      const proto = location.protocol === "https:" ? "wss" : "ws";
+      const ws = new WebSocket(`${proto}://${location.host}/ws`);
+
+      ws.onopen = () => { setStatus("on"); logLine("Соединение установлено"); };
+
+      ws.onmessage = (event) => {
+        const msg = JSON.parse(event.data);
+        els.clientId.textContent = msg.client_id;
+        if (msg.date) els.rateDate.textContent = msg.date;
+
+        if (msg.type === "welcome") {
+          logLine(`Подписка оформлена · клиент <b>${msg.client_id}</b>`);
+          renderTable(msg.rates);
+          renderTicker(msg.rates);
+        } else if (msg.type === "update") {
+          renderTable(msg.rates);
+          renderTicker(msg.rates);
+          const summary = msg.changes
+            .map((c) => `${c.char_code} ${c.direction === "up" ? "▲" : c.direction === "down" ? "▼" : "="}`)
+            .join("  ");
+          logLine(`Изменения (${msg.changes.length}): ${summary}`);
+        }
+      };
+
+      ws.onclose = () => {
+        setStatus("off");
+        logLine("Соединение разорвано · повтор через 3 с");
+        setTimeout(connect, 3000);
+      };
+      ws.onerror = () => ws.close();
+    }
+
+    connect();
+  </script>
+</body>
+</html>

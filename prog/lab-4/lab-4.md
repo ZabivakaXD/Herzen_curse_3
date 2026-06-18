@@ -48,12 +48,6 @@
 | Статическая документация из OpenAPI | ReDoc (`generate_docs.py` → `docs/`) |
 | Контейнеризация | Docker Compose |
 
-## Запуск
-
-```bash
-docker compose up --build
-```
-
 При старте выполняется миграция и наполнение базы:
 
 ![1.png](https://github.com/ZabivakaXD/Herzen_curse_3/blob/main/prog/lab-4/img/1.png)

@@ -19,7 +19,7 @@ python-open-weather
 
 [Cсылка на пакет в тестовом репозитории пакетов Python](https://test.pypi.org/project/openweather-for-lab-3/)
 
-Проверка работы:
+## Проверка работы:
 
 ![1.png](https://github.com/ZabivakaXD/Herzen_curse_3/blob/main/prog/lab-3/img/1.png)
 

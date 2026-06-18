@@ -1,3 +1,3 @@
 def myfoo():
-    author = "Kostya" # Здесь обознаться своё имя (авторство модуля)
+    author = "Kostya" 
     print(f"{author}'s module is imported")

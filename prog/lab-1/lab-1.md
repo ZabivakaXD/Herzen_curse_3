@@ -55,8 +55,6 @@ sys.path.append("http://localhost:8000")
 
 ![4.png](https://github.com/ZabivakaXD/Herzen_curse_3/blob/main/prog/lab-1/img/4.png)
 
-[Ссылка на код](https://github.com/ZabivakaXD/Herzen_curse_3/blob/main/prog/lab-1/activation_script.py)
-
 ```
 import re
 import sys
