@@ -102,9 +102,7 @@ backend/
 
 ![2.png](https://github.com/ZabivakaXD/Herzen_curse_3/blob/main/prog/lab-7/img/2.png)
 
-## Тестирование и CI/CD
-
-### Тесты (pytest + fakeredis)
+## Тесты
 
 Тесты лежат в `backend/tests/test_counter.py`. Redis не запускается
 по-настоящему — используется `fakeredis` (in-memory), что делает прогон
