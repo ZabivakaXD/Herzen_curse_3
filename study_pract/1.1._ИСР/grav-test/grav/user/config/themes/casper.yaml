@@ -1,0 +1,22 @@
+enabled: true
+dropdown:
+  enabled: false
+description: null
+logo: blog-icon.png
+year: null
+tagline: null
+header:
+  featured_image: null
+error_header_image: null
+footer: null
+social_twitter: null
+social_facebook: null
+social_github: null
+social_keybase: null
+social_linkedin: null
+social_spotify: null
+social_youtube: null
+social_discord: null
+social_flickr: null
+social_instagram: null
+favicon: {  }

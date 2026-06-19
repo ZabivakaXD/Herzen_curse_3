@@ -1,0 +1,11 @@
+state: enabled
+email: kostyab2@mail.ru
+fullname: Kostya
+title: Administrator
+access:
+  admin:
+    login: true
+    super: true
+  site:
+    login: true
+hashed_password: $2y$10$eLb0B5MF7ECcyRiWyOlvvuZ0brUvww8K.FQxCXBH4FXaG.z4CMNzi

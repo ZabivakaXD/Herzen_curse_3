@@ -1,0 +1,8 @@
+services:
+  grav:
+    image: getgrav/grav
+    ports:
+      - "8080:80"
+    volumes:
+      - ./grav/user:/var/www/html/user
+    restart: unless-stopped

@@ -1,0 +1,9 @@
+version: '1.2'
+timestamp: 1781792690
+count: 1
+index:
+  admin:
+    storage_key: admin
+    storage_timestamp: 1781792690
+    key: admin
+    email: kostyab2@mail.ru

@@ -1,0 +1,52 @@
+last_checked: 1781792691
+data:
+  -
+    title: 'Grav 2.0: Twig in Content and the New Security Sandbox'
+    url: 'https://getgrav.org/blog/grav-2-twig-content-security'
+    date: 1781697600
+    nicetime: '1 days ago'
+  -
+    title: 'macOS Golden Gate Web Development: Meet Reeve'
+    url: 'https://getgrav.org/blog/macos-golden-gate-reeve'
+    date: 1781604000
+    nicetime: '2 days ago'
+  -
+    title: 'Grav 2.0 Developer Guide: Admin Next Panels & Menu Bar'
+    url: 'https://getgrav.org/blog/grav-2-dev-admin-next-panels-menubar'
+    date: 1781092800
+    nicetime: '1 weeks ago'
+  -
+    title: 'The Grav API: The Foundation of 2.0'
+    url: 'https://getgrav.org/blog/grav-2-api'
+    date: 1781006400
+    nicetime: '1 weeks ago'
+  -
+    title: 'Grav 2.0 Developer Guide: Admin Next Custom Pages'
+    url: 'https://getgrav.org/blog/grav-2-dev-admin-next-custom-pages'
+    date: 1780660800
+    nicetime: '2 weeks ago'
+  -
+    title: 'Admin2 Goodies'
+    url: 'https://getgrav.org/blog/admin2-goodies'
+    date: 1780567200
+    nicetime: '2 weeks ago'
+  -
+    title: 'Grav 2.0 Developer Guide: Markdown Extensions'
+    url: 'https://getgrav.org/blog/grav-2-dev-markdown-extensions'
+    date: 1780488000
+    nicetime: '2 weeks ago'
+  -
+    title: 'Grav 2.0: Markdown Enhancements'
+    url: 'https://getgrav.org/blog/grav-2-markdown-enhancements'
+    date: 1780484400
+    nicetime: '2 weeks ago'
+  -
+    title: 'Captcha Options for Grav Forms'
+    url: 'https://getgrav.org/blog/grav-form-captcha-options'
+    date: 1780401600
+    nicetime: '2 weeks ago'
+  -
+    title: 'Grav 2.0 Developer Guide: Admin Next Custom Form Fields'
+    url: 'https://getgrav.org/blog/grav-2-dev-admin-next-custom-fields'
+    date: 1780315200
+    nicetime: '2 weeks ago'

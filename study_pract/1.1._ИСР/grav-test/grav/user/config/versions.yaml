@@ -1,0 +1,4 @@
+core:
+  grav:
+    version: 1.7.53
+    schema: 1.7.53_2026-06-09_0
