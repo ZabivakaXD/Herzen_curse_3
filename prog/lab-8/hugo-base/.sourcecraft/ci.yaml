@@ -1,0 +1,95 @@
+# .sourcecraft/ci.yaml
+# CI/CD для статического сайта на Hugo в среде SourceCraft.
+#
+# Схема SourceCraft:  on -> workflows -> tasks -> cubes
+#   * cube ("кубик") — это отдельный шаг, который виден в разделе CI/CD.
+#   * кубики одного task выполняются ПОСЛЕДОВАТЕЛЬНО на одном воркере;
+#     если кубик упал — task падает, и следующие кубики (в т.ч. публикация) не запускаются.
+#
+# Что делает пайплайн:
+#   verify           — на каждый pull_request в main: только проверки Markdown.
+#   build-and-deploy — на push в main: проверки Markdown -> сборка Hugo -> публикация.
+
+env:
+  ORG: zabivakaxd    
+  REPO: lab-1-sem-6
+
+on:
+  # PR в main — гоняем только проверки, без публикации.
+  pull_request:
+    - workflows: [verify]
+      filter:
+        target_branches: ["main"]
+
+  # push в main — проверки + сборка + публикация сайта.
+  push:
+    - workflows: [build-and-deploy]
+      filter:
+        branches: ["main"]
+
+workflows:
+
+  # ─────────────────────────────────────────────────────────────
+  # CI: проверки синтаксиса Markdown (два отдельных шага-кубика)
+  # ─────────────────────────────────────────────────────────────
+  verify:
+    tasks:
+      - name: markdown-checks
+        cubes:
+          # Шаг 1 — синтаксис и стиль Markdown (markdownlint-cli2)
+          - name: markdownlint
+            image: node:20-slim
+            script:
+              - npm install -g markdownlint-cli2@0.14.0
+              - markdownlint-cli2 "content/**/*.md" "*.md"
+
+          # Шаг 2 — проверка Markdown парсером remark (синтаксис/AST)
+          - name: remark-syntax
+            image: node:20-slim
+            script:
+              - npm install -g remark-cli remark-preset-lint-recommended
+              - remark --quiet --frail --use remark-preset-lint-recommended content/
+
+  # ─────────────────────────────────────────────────────────────
+  # CD: проверки Markdown -> сборка Hugo -> публикация в ветку release
+  # ─────────────────────────────────────────────────────────────
+  build-and-deploy:
+    tasks:
+      - name: deploy-site
+        cubes:
+          # Шаг 1 — markdownlint (тот же, что в verify: гейт перед сборкой)
+          - name: markdownlint
+            image: node:20-slim
+            script:
+              - npm install -g markdownlint-cli2@0.14.0
+              - markdownlint-cli2 "content/**/*.md" "*.md"
+
+          # Шаг 2 — remark
+          - name: remark-syntax
+            image: node:20-slim
+            script:
+              - npm install -g remark-cli remark-preset-lint-recommended
+              - remark --quiet --frail --use remark-preset-lint-recommended content/
+
+          # Шаг 3 — сборка сайта генератором Hugo (extended-версия)
+          - name: build
+            image: hugomods/hugo:exts-0.140.0
+            script:
+              # на случай, если тема подключена git-сабмодулем
+              - git submodule update --init --recursive
+              - hugo --gc --minify --destination public
+
+          # Шаг 4 — публикация результата в ветку release.
+          # SourceCraft Sites отдаёт сайт из ветки, указанной в .sourcecraft/sites.yaml.
+          - name: publish
+            image: alpine/git:latest
+            env:
+              # секрет SC_TOKEN = ваш персональный токен (PAT) из настроек репозитория
+              SC_TOKEN: ${{ secrets.SC_TOKEN }}
+            script:
+              - cd public
+              - git init -q
+              - git checkout -b release
+              - git add -A
+              - git -c user.email="ci@sourcecraft.dev" -c user.name="SourceCraft CI" commit -q -m "Deploy from ${SOURCECRAFT_COMMIT_REF_NAME}"
+              - git push -f "https://oauth2:${SC_TOKEN}@git.sourcecraft.dev/${ORG}/${REPO}.git" release

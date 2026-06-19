@@ -1,0 +1,54 @@
+:root {
+  --fg: #1a1a1a;
+  --muted: #666;
+  --accent: #2b6cb0;
+  --bg: #fafafa;
+  --maxw: 720px;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font: 17px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color: var(--fg);
+  background: var(--bg);
+}
+.container { max-width: var(--maxw); margin: 0 auto; padding: 0 20px 60px; }
+.site-header {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 24px 20px;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.brand { font-weight: 700; font-size: 1.2rem; text-decoration: none; color: var(--fg); }
+nav a { margin-left: 16px; text-decoration: none; color: var(--accent); }
+nav a:hover { text-decoration: underline; }
+h1 { line-height: 1.2; }
+a { color: var(--accent); }
+.post-list { list-style: none; padding: 0; }
+.post-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+}
+.post-list time, .post time { color: var(--muted); font-size: 0.9rem; }
+pre {
+  background: #f0f0f0;
+  padding: 12px 16px;
+  border-radius: 8px;
+  overflow-x: auto;
+}
+code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+.site-footer {
+  max-width: var(--maxw);
+  margin: 40px auto 0;
+  padding: 20px;
+  border-top: 1px solid #eee;
+  color: var(--muted);
+  font-size: 0.9rem;
+}

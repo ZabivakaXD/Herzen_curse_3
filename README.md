@@ -18,6 +18,8 @@
 
 [Лабораторная работа №7](https://github.com/ZabivakaXD/Herzen_curse_3/blob/main/prog/lab-7/lab-7.md)
 
+
+
 ## [Практика](https://github.com/ZabivakaXD/Herzen_curse_3/tree/main/study_pract)
 
 ### 6 семестр

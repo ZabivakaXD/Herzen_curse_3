@@ -1,0 +1,17 @@
+# .markdownlint-cli2.yaml
+# Настройки проверки Markdown (шаг markdownlint в CI/CD).
+config:
+  default: true     # включить весь набор правил по умолчанию
+  MD013: false      # не ограничивать длину строки (удобно для прозы)
+  MD033: false      # разрешить inline-HTML (часто нужен в Hugo-контенте)
+  MD041: false      # первый заголовок не обязан быть H1 (есть front matter)
+
+globs:
+  - "content/**/*.md"
+  - "*.md"
+
+ignores:
+  - "node_modules"
+  - "public"
+  - "themes"
+  - "resources"
