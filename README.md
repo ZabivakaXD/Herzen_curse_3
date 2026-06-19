@@ -24,6 +24,8 @@
 
 [Лабораторная работа №1](https://github.com/ZabivakaXD/Herzen_curse_3/blob/main/prog/lab-8/lab-8.md)
 
+[Лабораторная работа №2](https://github.com/ZabivakaXD/Herzen_curse_3/blob/main/prog/lab-10/lab-10.ipynb)
+
 ### [Практика](https://github.com/ZabivakaXD/Herzen_curse_3/tree/main/study_pract)
 
 [Отчет](https://github.com/ZabivakaXD/Herzen_curse_3/blob/main/study_pract/%D0%BE%D1%82%D1%87%D0%B5%D1%82_3%D0%BA%D1%83%D1%80%D1%81_%D0%91%D0%BE%D0%BB%D0%BE%D1%82%D0%BE%D0%B2%D0%9A%D0%90.pdf)
