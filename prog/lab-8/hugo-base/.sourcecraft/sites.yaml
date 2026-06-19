@@ -1,6 +1,0 @@
-# .sourcecraft/sites.yaml
-# Откуда SourceCraft Sites берёт готовый сайт.
-# Пайплайн публикует собранный Hugo-сайт в ветку release, в её корень.
-site:
-  root: "/"        # путь к файлам сайта внутри ветки (index.html в корне)
-  ref: "release"   # ветка, из которой публикуется сайт
