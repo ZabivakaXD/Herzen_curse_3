@@ -27,6 +27,7 @@ https://sourcecraft.dev/portal/docs/en/sourcecraft/security/ssh
 ## Решение:
 
 Базовый сайт на Hugo для SourceCraft
+Ссылка на SourceCraft: https://sourcecraft.dev/zabivakaxd/lab-1-sem-6?rev=main
 
 Минимальный сайт на Hugo **без внешней темы** — собирается «из коробки», без git-сабмодулей. Готов к публикации через CI/CD SourceCraft.
 
