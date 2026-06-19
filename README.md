@@ -20,7 +20,7 @@
 
 ## 6 семестр
 
-#@# [Программирование](https://github.com/ZabivakaXD/Herzen_curse_3/tree/main/prog)
+### [Программирование](https://github.com/ZabivakaXD/Herzen_curse_3/tree/main/prog)
 
 [Лабораторная работа №1](https://github.com/ZabivakaXD/Herzen_curse_3/blob/main/prog/lab-8/lab-8.md)
 
