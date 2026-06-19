@@ -1,8 +1,8 @@
 # Репозиторий Болотова Константина Александровича 3 курс РГПУ Им.Герцена
 
-## [Программирование](https://github.com/ZabivakaXD/Herzen_curse_3/tree/main/prog)
+## 5 семестр
 
-### 5 семестр
+### [Программирование](https://github.com/ZabivakaXD/Herzen_curse_3/tree/main/prog)
 
 [Лабораторная работа №1](https://github.com/ZabivakaXD/Herzen_curse_3/blob/main/prog/lab-1/lab-1.md)
 
@@ -18,11 +18,13 @@
 
 [Лабораторная работа №7](https://github.com/ZabivakaXD/Herzen_curse_3/blob/main/prog/lab-7/lab-7.md)
 
+## 6 семестр
 
+#@# [Программирование](https://github.com/ZabivakaXD/Herzen_curse_3/tree/main/prog)
 
-## [Практика](https://github.com/ZabivakaXD/Herzen_curse_3/tree/main/study_pract)
+[Лабораторная работа №1](https://github.com/ZabivakaXD/Herzen_curse_3/blob/main/prog/lab-8/lab-8.md)
 
-### 6 семестр
+### [Практика](https://github.com/ZabivakaXD/Herzen_curse_3/tree/main/study_pract)
 
 [Отчет](https://github.com/ZabivakaXD/Herzen_curse_3/blob/main/study_pract/%D0%BE%D1%82%D1%87%D0%B5%D1%82_3%D0%BA%D1%83%D1%80%D1%81_%D0%91%D0%BE%D0%BB%D0%BE%D1%82%D0%BE%D0%B2%D0%9A%D0%90.pdf)
 
